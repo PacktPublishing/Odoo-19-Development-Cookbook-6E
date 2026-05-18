@@ -26,6 +26,6 @@
     ],
 
     # Technical
-    'installable': True,
+    'installable': True
 }
 

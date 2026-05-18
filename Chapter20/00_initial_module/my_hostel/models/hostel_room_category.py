@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class RoomCategory(models.Model):
@@ -17,3 +17,4 @@ class RoomCategory(models.Model):
     child_ids = fields.One2many(
         'hostel.room.category', 'parent_id',
         string='Child Categories')
+    amount = fields.Float("Amount", help="Enter amount per month")
