@@ -26,6 +26,7 @@
 
     <record id="group_start_date" model="res.groups">
         <field name="name">Hostel: Start date feature</field>
+        <field name="privilege_id" ref="res_groups_other"/>
     </record>
 
 

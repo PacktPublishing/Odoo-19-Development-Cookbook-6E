@@ -1,12 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="payment_generic_redirect_form" name="Generic Payment Form">
-  <form t-att-action="form_action" method="POST">
-    <input type="hidden" name="reference" t-att-value="reference"/>
-    <input type="hidden" name="currency_id" t-att-value="currency and currency.id"/>
-    <input type="hidden" name="amount" t-att-value="amount"/>
-    <input type="hidden" name="partner_id" t-att-value="partner_id"/>
-    <p>Dummy payment form. Click below to simulate payment.</p>
-    <button type="submit">Pay Now</button>
-  </form>
-</template>
+
+    <!--
+        Redirect form for the Generic payment gateway.
+
+        This template is returned by PaymentProviderGeneric._get_redirect_form_view()
+        and rendered by the Odoo payment framework with the dict returned from
+        PaymentTransactionGeneric._get_specific_rendering_values().
+
+        Available template variables (set in _get_specific_rendering_values):
+            form_action   – POST target URL (our /payment/generic/redirect route)
+            reference     – Odoo transaction reference (e.g. "S00042")
+            amount        – Numeric transaction amount (float)
+            currency_code – ISO 4217 currency code (e.g. "USD", "INR")
+            partner_id    – res.partner database ID of the paying customer
+            return_url    – URL the gateway should redirect the user back to
+
+        In a real integration you would replace the form action with the
+        gateway's checkout URL and add any additional hidden fields it requires
+        (e.g. a checksum / signature field computed over the other values).
+    -->
+    <template
+        id="payment_generic_redirect_form"
+        name="Generic Payment: Redirect Form"
+    >
+        <form
+            t-att-action="form_action"
+            method="POST"
+            id="payment_generic_redirect_form"
+        >
+            <!-- Core transaction fields -->
+            <input type="hidden" name="reference"    t-att-value="reference"/>
+            <input type="hidden" name="amount"       t-att-value="amount"/>
+            <input type="hidden" name="currency"     t-att-value="currency_code"/>
+            <input type="hidden" name="partner_id"   t-att-value="partner_id"/>
+            <input type="hidden" name="return_url"   t-att-value="return_url"/>
+
+            <!--
+                TODO (production): add a gateway-specific HMAC or signature
+                field here to prevent tampering.  Example:
+                <input type="hidden" name="checksum" t-att-value="checksum"/>
+            -->
+
+            <!-- User-visible dummy form – replace with real gateway UI -->
+            <div class="o_payment_generic_form text-center py-4">
+                <p class="lead">
+                    You are about to pay
+                    <strong>
+                        <t t-esc="amount"/> <t t-esc="currency_code"/>
+                    </strong>
+                </p>
+                <p class="text-muted">
+                    Reference: <t t-esc="reference"/>
+                </p>
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-lg mt-2"
+                >
+                    Confirm Payment
+                </button>
+            </div>
+        </form>
+    </template>
+
 </odoo>

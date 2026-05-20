@@ -37,4 +37,3 @@
     # Technical
     'installable': True
 }
-

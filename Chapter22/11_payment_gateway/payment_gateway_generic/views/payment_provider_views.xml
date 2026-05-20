@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Extend the standard payment.provider form to show the Generic Gateway
+        credential fields only when the selected provider code is 'generic'.
+
+        The 'groups="base.group_no_one"' attribute hides the raw credential
+        fields from regular users; remove it if you want them visible to all
+        internal users.
+    -->
+    <record id="payment_provider_form_generic" model="ir.ui.view">
+        <field name="name">payment.provider.form.generic</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group
+                    name="generic_credentials"
+                    string="Generic Gateway Credentials"
+                    invisible="code != 'generic'"
+                >
+                    <field
+                        name="generic_api_key"
+                        string="API Key"
+                    />
+                    <field
+                        name="generic_api_secret"
+                        string="API Secret"
+                        password="True"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

@@ -6,7 +6,7 @@ class ConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     group_start_date = fields.Boolean(
-        "Manage hostel start dates",
+        "Manage Hostel Start Date",
         group='base.group_user',
         implied_group='my_hostel.group_start_date',
     )

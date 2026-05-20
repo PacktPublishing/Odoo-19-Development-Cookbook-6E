@@ -1,44 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <!-- Update company name -->
-    <record id="base.main_company" model="res.company">
-        <field name="name">Packt Publishing</field>
-    </record>
-
-    <!-- Create res.partner records -->
-    <record id="author_hda" model="res.partner">
+    <record id="student_hda" model="hostel.student">
         <field name="name">Husen Daudi</field>
     </record>
-    <record id="author_jvo" model="res.partner">
+    <record id="student_jvo" model="hostel.student">
         <field name="name">Jay Vora</field>
     </record>
-    <record id="author_vb" model="res.partner">
-        <field name="name">Vacha Bhatt</field>
-    </record>
-    <record id="author_jb" model="res.partner">
-        <field name="name">John Brunn</field>
-    </record>
-
-    <!-- Create hostel.room.member records linked to partners -->
-    <record id="member_hda" model="hostel.room.member">
-        <field name="partner_id" ref="author_hda"/>
-    </record>
-    <record id="member_jvo" model="hostel.room.member">
-        <field name="partner_id" ref="author_jvo"/>
-    </record>
-    <record id="member_vb" model="hostel.room.member">
-        <field name="partner_id" ref="author_vb"/>
-    </record>
-    <record id="member_jb" model="hostel.room.member">
-        <field name="partner_id" ref="author_jb"/>
-    </record>
-
-    <!-- Create hostel.room and assign members -->
     <record id="hostel_room_1" model="hostel.room">
         <field name="name">Hostel Room 01</field>
         <field name="room_no">HR001</field>
-        <field name="member_ids" eval="[(6, 0, [ref('member_hda'), ref('member_jvo'), ref('member_vb'), ref('member_jb')])]"/>
+        <field name="student_ids" eval="[(6, 0, [ref('student_hda'), ref('student_jvo')])]"/>
     </record>
-
 </odoo>

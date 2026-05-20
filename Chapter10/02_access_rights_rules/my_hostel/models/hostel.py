@@ -9,3 +9,4 @@ class Hostel(models.Model):
     hostel_code = fields.Char(string="Code", required=True)
     street = fields.Char('Street')
     street2 = fields.Char('Street2')
+

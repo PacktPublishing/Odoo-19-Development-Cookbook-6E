@@ -66,6 +66,6 @@
     </record>
 
     <menuitem id="menu_custom_hostel_room" name="Hostel Room" web_icon="my_hostel,static/description/icon.png"/>
-    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" groups="" />
+    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10"/>
 
 </odoo>

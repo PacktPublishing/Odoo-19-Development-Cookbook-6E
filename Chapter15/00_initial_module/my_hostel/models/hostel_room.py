@@ -13,4 +13,3 @@ class HostelRoom(models.Model):
     hostel_id = fields.Many2one("hostel.hostel", "hostel", help="Name of hostel")
     student_ids = fields.One2many("hostel.student", "room_id",
         string="Students", help="Enter students")
-

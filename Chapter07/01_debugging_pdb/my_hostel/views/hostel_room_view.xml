@@ -1,0 +1,82 @@
+<odoo>
+
+    <!-- =========================
+         TREE VIEW
+    ========================== -->
+    <record id="view_hostel_room_tree" model="ir.ui.view">
+        <field name="name">hostel.room.tree</field>
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="room_no"/>
+                <field name="room_rating"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+
+    <!-- =========================
+         FORM VIEW
+    ========================== -->
+    <record id="view_hostel_room_form" model="ir.ui.view">
+        <field name="name">hostel.room.form</field>
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <form string="Hostel Room">
+                
+                <header>
+                    <button name="export_available_rooms_attachment"
+                            type="object"
+                            string="Export Rooms"
+                            class="btn-primary"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="room_no"/>
+                        <field name="room_rating"/>
+                        <field name="state"/>
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                        <field name="other_info"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- =========================
+         ACTION
+    ========================== -->
+    <record id="action_hostel_room" model="ir.actions.act_window">
+        <field name="name">Hostel Rooms</field>
+        <field name="res_model">hostel.room</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <!-- =========================
+         MENU ROOT
+    ========================== -->
+    <menuitem id="menu_hostel_root"
+              name="Hostel Management"
+              sequence="10"/>
+
+
+    <!-- =========================
+         SUB MENU
+    ========================== -->
+    <menuitem id="menu_hostel_room"
+              name="Rooms"
+              parent="menu_hostel_root"
+              action="action_hostel_room"
+              sequence="20"/>
+
+</odoo>

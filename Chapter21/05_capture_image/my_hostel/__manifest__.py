@@ -2,16 +2,16 @@
 {
     # Module information
     'name': 'My Hostel',
-    'version': '18.0.1.0.1',
+    'version': '19.0.1.0.0',
     'category': 'Extra Tools',
     'license': 'LGPL-3',
     'summary': """
-        Odoo16 Book
+        Odoo19 Book
     """,
 
     # Author
     'author': 'Serpent Consulting Services Pvt. Ltd.',
-    'website': 'http://www.serpentcs.com',
+    'website': 'https://www.serpentcs.com',
 
     # Dependancies
     'depends': ['base', 'quality_iot'],

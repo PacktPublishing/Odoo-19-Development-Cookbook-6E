@@ -18,9 +18,13 @@
                         <group>
                             <field name="name" />
                             <field name="room_no"/>
+                            <field name="lang"/>
+                            <field name="validity_start"/>
                         </group>
                         <group>
                             <field name="description"/>
+                            <field name="room_rating"/>
+                            <field name="validity_end"/>
                         </group>
                     </group>
                     <notebook>
@@ -30,6 +34,7 @@
                     </notebook>
                 </sheet>
                 <div class="o_attachment_preview" invisible="state != 'draft'"/>
+                <chatter reload_on_attachment="True"/>
             </form>
         </field>
     </record>
@@ -62,12 +67,24 @@
         </field>
     </record>
 
+    <!-- Calendar View -->
+    <record id="hostel_room_calendar_view" model="ir.ui.view">
+        <field name="name">hostel Room Calendar</field>
+        <field name="model">hostel.room</field>
+        <field name="arch" type="xml">
+            <calendar date_start="validity_start" date_stop="validity_end" color="room_no">
+                <field name="name"/>
+                <field name="room_no"/>
+            </calendar>
+        </field>
+    </record>
+
     <record id="action_hostel_room" model="ir.actions.act_window">
         <field name="name">All Hostel Room</field>
         <field name="path">hotel-room</field>
         <field name="res_model">hostel.room</field>
         <field name="search_view_id" ref="hostel_room_view_search" />
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,calendar</field>
         <field name="context">{'list_view_ref': 'my_hostel.hostel_room_view_list', 'lang': 'fr_FR','default_lang': 'fr_FR', 'active_test': False, 'default_room_rating': 1.0}</field>
         <field name="domain">[('state', 'in', ['draft', 'available'])]</field>
     </record>
@@ -86,6 +103,13 @@
         <field name="sequence" eval="2"/>
     </record>
 
-    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" groups="" />
+    <record id="action_hostel_room_calendar" model="ir.actions.act_window.view">
+        <field name="act_window_id" ref="action_hostel_room" />
+        <field name="view_id" ref="hostel_room_calendar_view" />
+        <field name="view_mode">calendar</field>
+        <field name="sequence" eval="3"/>
+    </record>
+
+    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" />
 
 </odoo>
