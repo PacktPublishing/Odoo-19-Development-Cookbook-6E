@@ -1,7 +1,7 @@
 from xmlrpc import client
 
-server_url = 'http://localhost:8069'
-db_name = 'odoo-test'
+server_url = 'http://localhost:1919'
+db_name = 'cookbook_19'
 username = 'admin'
 password = 'admin'
 

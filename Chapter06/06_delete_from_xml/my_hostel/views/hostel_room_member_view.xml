@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='hostel_room_member_action' model='ir.actions.act_window'>
+        <field name="name">Hostel Room Member</field>
+        <field name="res_model">hostel.room.member</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="Hostel Room Member" id="hostel_room_member_menu" parent="hostel_base_menu"
+              action="hostel_room_member_action"/>
+
+    <!-- Form View -->
+    <record id="hostel_room_member_form" model="ir.ui.view">
+        <field name="name">Hostel Room Member Form</field>
+        <field name="model">hostel.room.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                        <group>
+                            <field name="date_of_birth"/>
+                            <field name="member_number"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="hostel_room_member_tree" model="ir.ui.view">
+        <field name="name">Hostel Room Member</field>
+        <field name="model">hostel.room.member</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="partner_id"/>
+                <field name="date_of_birth"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="member_number"/>
+            </list>
+        </field>
+    </record>
+
+
+</odoo>

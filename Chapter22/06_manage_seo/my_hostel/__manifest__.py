@@ -6,7 +6,7 @@
     "description": """
 Manage Hostel
 ==============
-Efficiently manage the entire residential facility in the hostel
+Efficiently manage the entire residential facility in the school
     """,  # Supports reStructuredText(RST) format (description is Deprecated)
     "category": "Tools",
     "website": "http://www.serpentcs.com",

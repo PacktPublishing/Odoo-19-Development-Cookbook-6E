@@ -46,6 +46,6 @@ patch(ControlButtons.prototype, {
 patch(ProductCard, {
     props: {
         ...ProductCard.props,
-        margin: String,
+        standard_price: String,
     },
 });

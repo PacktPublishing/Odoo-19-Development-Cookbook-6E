@@ -58,7 +58,7 @@ class HostelRoom(models.Model):
             raise ValidationError(_("Rent Amount Per Month should not be a negative value!"))
 
 
-class HostelRentStage(models.Model):
+class LibraryRentStage(models.Model):
     _name = 'hostel.room.stage'
     _description = 'Room Stages'
     _order = 'sequence,name'

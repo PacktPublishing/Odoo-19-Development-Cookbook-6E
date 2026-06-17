@@ -1,27 +1,21 @@
 import requests
 import json
 
-# Odoo server URL
-odoo_url = "http://localhost:8069/api/legacy/create_data"
+# Odoo server URL (adjust port/domain as needed)
+odoo_url = "http://localhost:1900/api/legacy/order"
 
-# Payload includes credentials and the room data to create
-payload = {
-    "params": {
-        "db": "odoo-test",
-        "username": "admin",
-        "password": "admin",
-        "data": {
-            "name": "Serpent CS",
-            "room_no": "501",
-            "description": "Serpent Consulting Services Pvt Ltd."
-        }
-    }
+# Data to send (example order)
+payload = {"params":{
+    "name": "Serpent CS",
+    "room_no": "301",
+    "description": "Serpent Consulting Services Pvt Ltd."}
 }
 
-# Send POST request to the Odoo controller
+# Send POST request
+# Sends data as JSON
 response = requests.post(
     odoo_url,
-    json=payload,
+    json=payload,          
     headers={'Content-Type': 'application/json'}
 )
 

@@ -37,8 +37,5 @@ class HostelRoom(models.Model):
     @api.constrains("rent_amount")
     def _check_rent_amount(self):
         """Constraint on negative rent amount"""
-        for record in self:
-            if record.rent_amount < 0:
-                raise ValidationError(
-                    _("Rent Amount Per Month should not be a negative value!")
-                )
+        if self.rent_amount < 0:
+            raise ValidationError(_("Rent Amount Per Month should not be a negative value!"))

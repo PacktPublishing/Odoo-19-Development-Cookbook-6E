@@ -10,8 +10,8 @@
             </button>
             <button class="btn btn-secondary btn-lg py-5"
                     t-on-click="clickLastOrderButton">
-                <i class="fa fa-server"></i>
-                <span> Last Orders</span>
+                <i class="fa fa-server"></i> Making RPC calls
+                <span>Last Orders</span>
             </button>
         </xpath>
     </t>
@@ -19,7 +19,7 @@
     <t t-name="ProductScreen" t-inherit="point_of_sale.ProductScreen"
         t-inherit-mode="extension">
         <xpath expr="//ProductCard" position="attributes">
-            <attribute name="margin">
+            <attribute name="standard_price">
                 pos.env.utils.formatCurrency(product.list_price - product.standard_price)
             </attribute>
         </xpath>
@@ -28,9 +28,9 @@
     <t t-name="ProductCard" t-inherit="point_of_sale.ProductCard"
         t-inherit-mode="extension">
         <xpath expr="//div[hasclass('product-content')]" position="after">
-            <span t-if="props.margin"
+            <span t-if="props.standard_price"
                   class="sale_margin py-1 fw-bolder">
-                <t t-esc="props.margin"/>
+                <t t-esc="props.standard_price"/>
             </span>
         </xpath>
     </t>

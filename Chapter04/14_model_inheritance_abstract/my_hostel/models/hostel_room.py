@@ -2,14 +2,14 @@ from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 class BaseArchive(models.AbstractModel):
-    _name = 'base.archive'
+	_name = 'base.archive'
     _description = 'Base Archive'
 
-    active = fields.Boolean(default=True)
-    
-    def do_archive(self):
-        for record in self:
-            record.active = not record.active
+	active = fields.Boolean(default=True)
+	
+	def do_archive(self):
+		for record in self:
+			record.active = not record.active
 
 class HostelRoom(models.Model):
 
@@ -32,7 +32,7 @@ class HostelRoom(models.Model):
     student_ids = fields.One2many("hostel.student", "room_id",
         string="Students", help="Enter students")
     hostel_amenities_ids = fields.Many2many("hostel.amenities",
-        "hostel_room_amenities_rel", "room_id", "amenity_id",
+        "hostel_room_amenities_rel", "room_id", "amenitiy_id",
         string="Amenities", domain="[('active', '=', True)]",
         help="Select hostel room amenities")
     student_per_room = fields.Integer("Student Per Room", required=True,
@@ -48,8 +48,5 @@ class HostelRoom(models.Model):
     @api.constrains("rent_amount")
     def _check_rent_amount(self):
         """Constraint on negative rent amount"""
-        for record in self:
-            if record.rent_amount < 0:
-                raise ValidationError(
-                    _("Rent Amount Per Month should not be a negative value!")
-                )
+        if self.rent_amount < 0:
+            raise ValidationError(_("Rent Amount Per Month should not be a negative value!"))

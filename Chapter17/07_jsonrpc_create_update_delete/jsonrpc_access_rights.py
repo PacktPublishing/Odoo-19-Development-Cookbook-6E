@@ -2,12 +2,15 @@ import json
 import random
 import requests
 
-server_url = 'http://localhost:8069'
-db_name = 'odoo-test'
+
+server_url = 'http://localhost:1919'
+db_name = 'cookbook_19'
 username = 'admin'
 password = 'admin'
+
 json_endpoint = "%s/jsonrpc" % server_url
 headers = {"Content-Type": "application/json"}
+
 
 def get_json_payload(service, method, *args, **kwargs):
     kwargs = kwargs or {}
@@ -17,7 +20,7 @@ def get_json_payload(service, method, *args, **kwargs):
         "params": {
             "service": service,
             "method": method,
-            "args": list(args) + [kwargs] if kwargs else list(args)  # ✅ kwargs appended as last positional arg
+            "args": args
         },
         "id": random.randint(0, 1000000000),
     })
@@ -29,12 +32,12 @@ user_id = response.json()['result']
 if user_id:
     payload = get_json_payload("object", "execute_kw",
         db_name, user_id, password,
-        'hostel.room', 'has_access', [], operation='create')  # ✅ operation as kwarg
-    
+        'hostel.room', 'check_access_rights', ['create'])
     res = requests.post(json_endpoint, data=payload, headers=headers)
     if res.status_code == 200:
         print("Has create access!")
     else:
-        print("No create access!")
+        print("Failed: wrong credentials")
+
 else:
     print("Failed: wrong credentials")
