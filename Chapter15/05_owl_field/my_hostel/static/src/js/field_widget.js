@@ -9,35 +9,41 @@ class ColorPill extends Component {
 }
 
 export class OWLCategColorField extends Component {
-    static supportedFieldTypes = ["integer"];
-    static template = "OWLFieldColorPills";
+    static supportedFieldTypes = ['integer'];
+    static template = 'OWLFieldColorPills';
     static components = { ColorPill };
     setup() {
         this.totalColors = [1,2,3,4,5,6];
-        this.categoryInfo = {};
         onWillStart(async() => {
             await this.loadCategInformation();
         });
+        onWillRender(async() => {
+            await this.loadCategInformation();
+        });
+        super.setup();
     }
     colorUpdated(value) {
         this.props.record.update({ [this.props.name]: value });
     }
     async loadCategInformation() {
-        const self = this;
-        const resModel = self.env.model.root.resModel;
+        var self = this;
+        self.categoryInfo = {};
+        var resModel = self.env.model.root.resModel;
+        var domain = [];
+        var fields = ['category'];
+        var groupby = ['category'];
         const categInfoPromise = await self.env.services.orm.call(
             resModel,
-            "web_read_group",
+            "read_group",
             [],
             {
-                domain: [],
-                aggregates: ["__count"], 
-                groupby: ["category"],
+                domain,
+                fields,
+                groupby,
             }
         );
-        const groups = categInfoPromise.groups;
-        groups.forEach((group) => {
-            self.categoryInfo[group.category] = group.__count;
+        categInfoPromise.map((info) => {
+            self.categoryInfo[info.category] = info.category_count;
         });
     }
 }

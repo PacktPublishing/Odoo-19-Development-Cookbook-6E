@@ -1,11 +1,11 @@
 import odoorpc
 
-db_name = 'odoo-test'
+db_name = 'cookbook_19'
 user_name = 'admin'
 password = 'admin'
 
 # Prepare the connection to the server
-odoo = odoorpc.ODOO('localhost', port=8069)
+odoo = odoorpc.ODOO('localhost', port=1919)
 odoo.login(db_name, user_name, password)  # login
 
 # User information

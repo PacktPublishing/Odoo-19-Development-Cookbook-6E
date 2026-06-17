@@ -18,11 +18,9 @@
                         <group>
                             <field name="name" />
                             <field name="room_no"/>
-                            <field name="lang"/>
                         </group>
                         <group>
                             <field name="description"/>
-                            <field name="room_rating"/>
                         </group>
                     </group>
                     <notebook>
@@ -87,6 +85,6 @@
         <field name="sequence" eval="2"/>
     </record>
 
-    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" />
+    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" groups="" />
 
 </odoo>

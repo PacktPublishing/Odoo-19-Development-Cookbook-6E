@@ -26,14 +26,11 @@
         <section class="hostel_list">
             <div class="container">
                 <h2>Hostel</h2>
-                <table class="table hostel_snippet table-striped" data-number-of-hostels="5">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Code</th>
-                        </tr>
-                    </thead>
-                    <tbody class="hostel_snippet_rows"></tbody>
+                <table class="table hostel_snippet table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                    </tr>
                 </table>
             </div>
         </section>

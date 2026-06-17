@@ -3,7 +3,7 @@
     'name': "My Hostel",  # Module title
     'summary': "Manage Hostel easily",  # Module subtitle phrase
     'description': """
-Manage hostel
+Manage Library
 ==============
 Description related to Hostel.
     """,  # Supports reStructuredText(RST) format

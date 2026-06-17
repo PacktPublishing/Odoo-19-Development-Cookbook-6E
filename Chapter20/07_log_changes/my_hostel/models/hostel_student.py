@@ -80,9 +80,7 @@ class HostelStudent(models.Model):
         self.message_post_with_source('my_hostel.assign_room_to_student')
 
     def send_mail_assign_room_qweb(self):
-        self.message_post_with_source(
-            'my_hostel.assign_room_to_student_qweb',
-            subtype_xmlid='mail.mt_comment')
+        self.message_post_with_source('my_hostel.assign_room_to_student_qweb')
 
     @api.model
     def message_new(self, msg_dict, custom_values=None):

@@ -18,11 +18,9 @@
                         <group>
                             <field name="name"/>
                             <field name="room_no"/>
-                            <field name="lang"/>
                         </group>
                         <group>
                             <field name="description"/>
-                            <field name="room_rating"/>
                         </group>
                     </group>
                     <notebook>
@@ -53,9 +51,9 @@
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" filter_domain="['|', ('display_name', 'ilike', self), ('room_no', '=', self)]"/>
+                <field name="name"/>
                 <field name="room_no"/>
-                <group>
+                <group expand="0" string="Group By">
                     <filter string="State" name="state" context="{'group_by':'state'}"/>
                </group>
             </search>
@@ -86,6 +84,6 @@
         <field name="sequence" eval="2"/>
     </record>
 
-    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" />
+    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" groups="" />
 
 </odoo>
