@@ -12,3 +12,13 @@ class Hostel(models.Model):
     is_public = fields.Boolean(groups='my_hostel.group_hostel_manager')
     notes = fields.Text(groups="my_hostel.group_hostel_manager")
     date_start = fields.Date('Start Date', groups='my_hostel.group_start_date')
+    details_added = fields.Text(
+        string="Details",
+        groups='my_hostel.group_hostel_manager')
+
+    def add_details(self):
+        self.ensure_one()
+        message = "Details are(added by: %s)" % self.env.user.name
+        self.sudo().write({
+            'details_added': message
+        })

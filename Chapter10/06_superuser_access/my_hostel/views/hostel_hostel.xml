@@ -18,6 +18,9 @@
         <field name="model">hostel.hostel</field>
         <field name="arch" type="xml">
             <form string="Hostel">
+                <header>
+                    <button name="add_details" string="Add Details" type="object"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h3>
@@ -41,6 +44,7 @@
                                 <field name="street2" placeholder="Street 2..." class="o_address_street"/>
                             </div>
                             <field name="notes"/>
+                            <field name="details_added"/>
                         </group>
 
                     </group>
@@ -73,10 +77,10 @@
         </field>
     </record>
 
-    <menuitem id="hostel_main_menu" name="Hostel" sequence="1"/>
+    <menuitem id="hostel_main_menu" name="Hostel" sequence="1"  groups = "my_hostel.group_hostel_user"/>
 
     <menuitem id="hostel_type_menu" name="Hostel" parent="hostel_main_menu"
-        action="my_hostel.action_hostel" groups="my_hostel.group_hostel_manager"
+        action="my_hostel.action_hostel"  groups = "my_hostel.group_hostel_user"
         sequence="1"/>
 
 </odoo>

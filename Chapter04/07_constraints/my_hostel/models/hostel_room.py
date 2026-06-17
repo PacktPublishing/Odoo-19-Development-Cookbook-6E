@@ -17,7 +17,7 @@ class HostelRoom(models.Model):
     student_ids = fields.One2many("hostel.student", "room_id",
         string="Students", help="Enter students")
     hostel_amenities_ids = fields.Many2many("hostel.amenities",
-        "hostel_room_amenities_rel", "room_id", "amenitiy_id",
+        "hostel_room_amenities_rel", "room_id", "amenity_id",
         string="Amenities", domain="[('active', '=', True)]",
         help="Select hostel room amenities")
 
@@ -29,5 +29,8 @@ class HostelRoom(models.Model):
     @api.constrains("rent_amount")
     def _check_rent_amount(self):
         """Constraint on negative rent amount"""
-        if self.rent_amount < 0:
-            raise ValidationError(_("Rent Amount Per Month should not be a negative value!"))
+        for record in self:
+            if record.rent_amount < 0:
+                raise ValidationError(
+                    _("Rent Amount Per Month should not be a negative value!")
+                )

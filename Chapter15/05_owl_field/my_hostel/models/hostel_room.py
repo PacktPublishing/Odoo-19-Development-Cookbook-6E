@@ -11,7 +11,6 @@ class HostelRoom(models.Model):
     room_no = fields.Char("Room No.", required=True)
     image = fields.Binary(string="Image")
     hostel_id = fields.Many2one("hostel.hostel", "hostel", help="Name of hostel")
-    category = fields.Integer('Category')
+    category = fields.Integer("Category")
     student_ids = fields.One2many("hostel.student", "room_id",
         string="Students", help="Enter students")
-

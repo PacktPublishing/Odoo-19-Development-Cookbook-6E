@@ -10,8 +10,8 @@
             </button>
             <button class="btn btn-secondary btn-lg py-5"
                     t-on-click="clickLastOrderButton">
-                <i class="fa fa-server"></i> Making RPC calls
-                <span>Last Orders</span>
+                <i class="fa fa-server"></i>
+                <span> Last Orders</span>
             </button>
         </xpath>
     </t>

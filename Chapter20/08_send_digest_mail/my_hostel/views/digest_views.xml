@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='kpi_general']" position="after">
                 <group name="kpi_hostel" string="Hostel">
-                    <field name="kpi_room_rent"/>
+                    <field name="kpi_room_created"/>
                 </group>
             </xpath>
         </field>

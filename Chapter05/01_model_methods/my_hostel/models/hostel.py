@@ -1,41 +1,51 @@
-# -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import fields, models, api
 
 
-class HostelRoom(models.Model):
+class Hostel(models.Model):
+    _name = 'hostel.hostel'
+    _description = "Information about hostel"
+    _order = "id desc, name"
+    _rec_name = 'hostel_code'
 
-    _name = 'hostel.room'
-    _description = "Information about hostel Room"
-
-    name = fields.Char(string="Hostel Room Name", required=True)
-    room_no = fields.Char(string="Room Number", required=True)
+    name = fields.Char(string="hostel Name", required=True)
+    hostel_code = fields.Char(string="Code", required=True)
+    street = fields.Char('Street')
+    street2 = fields.Char('Street2')
+    zip = fields.Char('Zip', change_default=True)
+    city = fields.Char('City')
+    state_id = fields.Many2one("res.country.state", string='State')
+    country_id = fields.Many2one('res.country', string='Country')
+    phone = fields.Char('Phone',required=True)
+    mobile = fields.Char('Mobile',required=True)
+    email = fields.Char('Email')
+    hostel_floors = fields.Integer(string="Total Floors")
+    image = fields.Binary('Hostel Image')
+    active = fields.Boolean("Active", default=True,
+        help="Activate/Deactivate hostel record")
+    type = fields.Selection([("male", "Boys"), ("female", "Girls"),
+        ("common", "Common")], "Type", help="Type of Hostel",
+        required=True, default="common")
     other_info = fields.Text("Other Information",
         help="Enter more information")
     description = fields.Html('Description')
-    room_rating = fields.Float('Hostel Average Rating', digits=(14, 4))
-    state = fields.Selection([
-        ('draft', 'Unavailable'),
-        ('available', 'Available'),
-        ('closed', 'Closed')],
-        'State', default="draft")
+    hostel_rating = fields.Float('Hostel Average Rating', 
+                                # digits=(14, 4) # Method 1: Optional precision (total, decimals),
+                                 digits='Rating Value' # Method 2
+                                 )
+    category_id = fields.Many2one('hostel.category')
+    ref_doc_id = fields.Reference(selection='_referencable_models', string='Reference Document')
+    rector = fields.Many2one("res.partner", "Rector",
+        help="Select hostel rector")
 
     @api.model
-    def is_allowed_transition(self, old_state, new_state):
-        allowed = [('draft', 'available'),
-                   ('available', 'closed'),
-                   ('closed', 'draft')]
-        return (old_state, new_state) in allowed
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([('field_id.name', '=', 'message_ids')])
+        return [(x.model, x.name) for x in models]
 
-    def change_state(self, new_state):
-        for room in self:
-            if room.is_allowed_transition(room.state, new_state):
-                room.state = new_state
-            else:
-                continue
-
-    def make_available(self):
-        self.change_state('available')
-
-    def make_closed(self):
-        self.change_state('closed')
-
+    @api.depends('hostel_code')
+    def _compute_display_name(self):
+        for record in self:
+            name = record.name
+            if record.hostel_code:
+                name = f'{name} ({record.hostel_code})'
+            record.display_name = name

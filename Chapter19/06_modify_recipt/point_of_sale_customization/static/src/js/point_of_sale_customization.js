@@ -48,7 +48,7 @@ patch(ControlButtons.prototype, {
 patch(ProductCard, {
     props: {
         ...ProductCard.props,
-        standard_price: String,
+        margin: String,
     },
 });
 
@@ -57,7 +57,7 @@ patch(OrderSummary.prototype, {
         super._setValue(val);
         const selectedLine = this.currentOrder.getSelectedOrderline();
         if (selectedLine && selectedLine.product_id.standard_price) {
-            let price_unit = selectedLine.getUnitPrice() * (1.0 - (selectedLine.getDiscount() / 100.0));
+            let price_unit = selectedLine.price_unit * (1.0 - (selectedLine.getDiscount() / 100.0));
             if (selectedLine.product_id.standard_price > price_unit) {
                 this.dialog.add(AlertDialog,  {
                     title: 'Warning', 
@@ -71,7 +71,7 @@ patch(OrderSummary.prototype, {
 patch(PosOrder.prototype, {
     saved_amount(){
         let saved_amount = this.lines.reduce((rem, line) => {
-            let diffrence = (line.product_id.list_price * line.qty) - line.getBasePrice();
+            let diffrence = (line.product_id.list_price * line.qty) - line.basePrice;
             return rem + diffrence;
         }, 0);
         if (saved_amount > 0) {

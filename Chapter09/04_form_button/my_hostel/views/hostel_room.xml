@@ -68,6 +68,6 @@
         <field name="sequence" eval="2"/>
     </record>
 
-    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10" groups="" />
+    <menuitem id="menu_all_hostel_room" parent="menu_custom_hostel_room" action="action_hostel_room" sequence="10"/>
 
 </odoo>

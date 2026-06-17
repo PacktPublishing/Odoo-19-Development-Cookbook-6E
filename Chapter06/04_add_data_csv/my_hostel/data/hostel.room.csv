@@ -1,0 +1,6 @@
+id,name,room_no,floor_no,currency_id/id,rent_amount,student_per_room
+room_1,Hostel Room A,HR-A,1,base.USD,500,2
+room_2,Hostel Room B,HR-B,1,base.USD,600,3
+room_3,Hostel Room C,HR-C,2,base.USD,550,3
+room_4,Hostel Room D,HR-D,2,base.USD,650,2
+room_5,Hostel Room E,HR-E,3,base.USD,700,2

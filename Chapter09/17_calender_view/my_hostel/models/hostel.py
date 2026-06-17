@@ -13,6 +13,11 @@ class HostelRoom(models.Model):
     _inherit = ['mail.thread']
     _description = "Information about hostel Room"
 
+    @api.model
+    def _lang_get(self):
+        return self.env['res.lang'].get_installed()
+
+    lang = fields.Selection(_lang_get, string='Language')
     name = fields.Char(string="Hostel Name", required=True)
     room_no = fields.Char(string="Room Number", required=True)
     other_info = fields.Text("Other Information",
@@ -30,6 +35,8 @@ class HostelRoom(models.Model):
         ondelete='restrict',
         index=True
     )
+    validity_start = fields.Datetime(string='Validity Start Date', copy=False)
+    validity_end = fields.Datetime(string='Validity End Date', copy=False)
 
     @api.model
     def is_allowed_transition(self, old_state, new_state):

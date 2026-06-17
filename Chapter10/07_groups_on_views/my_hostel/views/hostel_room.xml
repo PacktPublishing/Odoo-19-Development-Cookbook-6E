@@ -19,6 +19,9 @@
         <field name="arch" type="xml">
             <form string="Hostel">
                 <sheet>
+                     <header>
+                        <button name="add_details" string="Add Details" type="object" groups="my_hostel.group_hostel_manager"/>
+                    </header>
                     <div class="oe_title">
                         <h3>
                             <table>
@@ -72,7 +75,7 @@
         </field>
     </record>
 
-    <menuitem id="hostel_main_menu" name="Hostel" sequence="1"/>
+    <menuitem id="hostel_main_menu" name="Hostel" sequence="1" groups = "my_hostel.group_hostel_user"/>
 
     <menuitem id="hostel_type_menu" name="Hostel" parent="hostel_main_menu"
         action="my_hostel.action_hostel" groups="my_hostel.group_hostel_manager"

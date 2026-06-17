@@ -12,7 +12,12 @@ class HostelRoom(models.Model):
     _name = 'hostel.room'
     _description = "Information about hostel Room"
 
-    name = fields.Char(string="Hostel Name", required=True)
+    @api.model
+    def _lang_get(self):
+        return self.env['res.lang'].get_installed()
+
+    lang = fields.Selection(_lang_get, string='Language')
+    name = fields.Char(string="Hostel Name", required=True, translate=True)
     room_no = fields.Char(string="Room Number", required=True)
     other_info = fields.Text("Other Information",
                              help="Enter more information")

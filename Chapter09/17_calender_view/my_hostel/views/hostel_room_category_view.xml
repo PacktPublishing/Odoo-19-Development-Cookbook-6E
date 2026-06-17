@@ -113,7 +113,7 @@
 
     <!-- list View -->
     <record id="hostel_room_category_view_list" model="ir.ui.view">
-        <field name="name">Hostel Room List</field>
+        <field name="name">Hostel Room Category List</field>
         <field name="model">hostel.room.category</field>
         <field name="arch" type="xml">
             <list>

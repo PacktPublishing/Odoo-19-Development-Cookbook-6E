@@ -46,5 +46,5 @@ class HostelStudent(models.Model):
     discharge_date = fields.Date(
         "Discharge Date", help="Date on which student discharge")
     duration = fields.Integer(
-        "Duration", compute="_compute_check_duration",
+        "Duration (in months)", compute="_compute_check_duration",
         inverse="_inverse_duration", help="Enter duration of living")
