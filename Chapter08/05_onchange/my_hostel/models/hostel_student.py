@@ -33,7 +33,7 @@ class HostelStudent(models.Model):
         default=fields.Datetime.today)
     discharge_date = fields.Date("Discharge Date",
         help="Date on which student discharge")
-    duration = fields.Integer("Duration", inverse="_inverse_duration",
+    duration = fields.Integer("Duration (in months)", inverse="_inverse_duration",
                                help="Enter duration of living")
 
     def action_assign_room(self):

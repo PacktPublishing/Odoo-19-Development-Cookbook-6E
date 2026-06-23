@@ -1,48 +1,66 @@
-# -*- coding: utf-8 -*-
 import logging
 
-from odoo import api, fields, models
-from odoo.exceptions import UserError
-from odoo.tools.translate import _
+from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
 
+class Hostel(models.Model):
+    _name = 'hostel.hostel'
+    _description = "Information about hostel"
+    _order = "id desc, name"
+    _rec_name = 'hostel_code'
 
-class HostelRoom(models.Model):
-
-    _name = 'hostel.room'
-    _description = "Information about hostel Room"
-
-    name = fields.Char(string="Hostel Name", required=True)
-    room_no = fields.Char(string="Room Number", required=True)
+    name = fields.Char(string="hostel Name", required=True)
+    hostel_code = fields.Char(string="Code", required=True)
+    street = fields.Char('Street')
+    street2 = fields.Char('Street2')
+    zip = fields.Char('Zip', change_default=True)
+    city = fields.Char('City')
+    state_id = fields.Many2one("res.country.state", string='State')
+    country_id = fields.Many2one('res.country', string='Country')
+    phone = fields.Char('Phone',required=True)
+    mobile = fields.Char('Mobile',required=True)
+    email = fields.Char('Email')
+    hostel_floors = fields.Integer(string="Total Floors")
+    image = fields.Binary('Hostel Image')
+    active = fields.Boolean("Active", default=True,
+        help="Activate/Deactivate hostel record")
+    type = fields.Selection([("male", "Boys"), ("female", "Girls"),
+        ("common", "Common")], "Type", help="Type of Hostel",
+        required=True, default="common")
+    other_info = fields.Text("Other Information",
+        help="Enter more information")
     description = fields.Html('Description')
-    room_rating = fields.Float('Hostel Average Rating', digits=(14, 4))
-    member_ids = fields.Many2many('hostel.room.member', string='Members')
-    category_id = fields.Many2one('hostel.room.category', string='Category')
-    cost_price = fields.Float('Room Cost')
-
-    def grouped_data(self):
-        data = self._get_average_cost()
-        _logger.info("Grouped Data %s" % data)
+    hostel_rating = fields.Float('Hostel Average Rating', 
+                                # digits=(14, 4) # Method 1: Optional precision (total, decimals),
+                                 digits='Rating Value' # Method 2
+                                 )
+    category_id = fields.Many2one('hostel.category')
+    ref_doc_id = fields.Reference(selection='_referencable_models', string='Reference Document')
+    rector = fields.Many2one("res.partner", "Rector",
+        help="Select hostel rector")
 
     @api.model
-    def _get_average_cost(self):
-        grouped_result = self.read_group(
-            domain=[('cost_price', "!=", False)], # Domain
-            fields=['category_id', 'cost_price:avg'], # Fields to access
-            groupby=['category_id'] # group_by
-            )
-        return grouped_result
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([('field_id.name', '=', 'message_ids')])
+        return [(x.model, x.name) for x in models]
 
-class HostelRoomMember(models.Model):
+    @api.depends('hostel_code')
+    def _compute_display_name(self):
+        for record in self:
+            name = record.name
+            if record.hostel_code:
+                name = f'{name} ({record.hostel_code})'
+            record.display_name = name
 
-    _name = 'hostel.room.member'
-    _inherits = {'res.partner': 'partner_id'}
-    _description = "Hostel Room member"
+        # Sorting recordset
 
-    partner_id = fields.Many2one('res.partner', ondelete='cascade' , required=True)
-    date_start = fields.Date('Member Since')
-    date_end = fields.Date('Termination Date')
-    member_number = fields.Char()
-    member_code = fields.Integer()
-    date_of_birth = fields.Date('Date of birth')
+    def sort_hostel(self):
+        all_hostel = self.search([])
+        hostel_sorted = self.sort_rooms_by_rating(all_hostel)
+        _logger.info('Hostel before sorting: %s', all_hostel)
+        _logger.info('Hostel after sorting: %s', hostel_sorted)
+
+    @api.model
+    def sort_rooms_by_rating(self, all_hostel):
+        return all_hostel.sorted(key='hostel_rating')

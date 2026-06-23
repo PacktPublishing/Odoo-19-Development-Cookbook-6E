@@ -5,11 +5,11 @@ class TestHostelRoomState(TransactionCase):
 
     def setUp(self, *args, **kwargs):
         super(TestHostelRoomState, self).setUp(*args, **kwargs)
-        self.partner_vandan = self.env['res.partner'].create({'name': 'Vandan Pandeji'})
-        self.partner_pratik = self.env['res.partner'].create({'name': 'Pratik Vaza'})
+        self.partner_liam = self.env['res.partner'].create({'name': 'Liam'})
+        self.partner_amelia = self.env['res.partner'].create({'name': 'Amelia'})
         self.member_ids = self.env['hostel.room.member'].create([
-            {'partner_id': self.partner_vandan.id, 'member_number': '007'},
-            {'partner_id': self.partner_pratik.id, 'member_number': '357'}])
+            {'partner_id': self.partner_liam.id, 'member_number': '007'},
+            {'partner_id': self.partner_amelia.id, 'member_number': '357'}])
         self.test_hostel_room = self.env['hostel.room'].create({
             'name': 'Hostel Room 01',
             'room_no': '1',

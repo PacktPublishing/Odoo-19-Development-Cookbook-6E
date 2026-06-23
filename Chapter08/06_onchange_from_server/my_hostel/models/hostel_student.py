@@ -2,7 +2,6 @@
 from datetime import timedelta
 
 from odoo import _, api, models, fields
-from odoo.tests import Form
 
 
 class HostelStudent(models.Model):
@@ -35,7 +34,7 @@ class HostelStudent(models.Model):
         default=fields.Datetime.today)
     discharge_date = fields.Date("Discharge Date",
         help="Date on which student discharge")
-    duration = fields.Integer("Duration", inverse="_inverse_duration",
+    duration = fields.Integer("Duration (in months)", inverse="_inverse_duration",
                                help="Enter duration of living")
 
     def action_assign_room(self):
@@ -60,9 +59,5 @@ class HostelStudent(models.Model):
                     self.discharge_date.month - self.admission_date.month)
 
     def return_room(self):
-        self.ensure_one()
-        wizard = self.env['assign.room.student.wizard']
-        with Form(wizard) as return_form:
-            return_form.room_id = self.env.ref('my_hostel.101_room')
-            record = return_form.save()
-            record.with_context(active_id=self.id).add_room_in_student()
+        for record in self:
+            record.room_id = False

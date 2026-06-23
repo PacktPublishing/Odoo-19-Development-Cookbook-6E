@@ -1,32 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+        Master data: registers the Generic Gateway as a payment provider.
 
-<odoo>
-  <record id="payment_provider_generic" model="payment.provider">
-    <field name="name">Generic Payment</field>
-    <field name="code">generic</field>
-    <field name="state">enabled</field>
-    <field name="is_published">True</field>
-    <field name="generic_api_key">demo_key</field>
-    <field name="generic_api_secret">demo_secret</field>
-    <field name="payment_method_ids"
-               eval="[Command.set([
-                         ref('payment.payment_method_card'),
-                         ref('payment.payment_method_emi_india'),
-                         ref('payment.payment_method_fpx'),
-                         ref('payment.payment_method_netbanking'),
-                         ref('payment.payment_method_paylater_india'),
-                         ref('payment.payment_method_paynow'),
-                         ref('payment.payment_method_upi'),
-                         ref('payment.payment_method_wallets_india'),
-                     ])]"
-        />
-  </record>
-  
-<!--   <record id="payment_method_generic_manual_in" model="payment.method.line"> -->
-<!--         <field name="name">Generic Manual In</field> -->
-<!--         <field name="payment_type">inbound</field> -->
-<!--         <field name="provider_id" ref="payment_provider_generic"/> -->
-<!--         <field name="payment_method_id" ref="account.account_payment_method_manual_in"/> -->
-<!--         <field name="sequence">10</field> -->
-<!--     </record> -->
-  
+        noupdate="1" means Odoo will not overwrite this record on subsequent
+        module upgrades, so any admin changes to state/keys are preserved.
+
+        'state' is set to 'test' (not 'enabled') so the provider is active in
+        test databases but requires an explicit switch to 'enabled' in
+        production.  This avoids accidentally exposing a dummy gateway to real
+        customers on the first install.
+
+        Payment method links: the eval below links the provider to card
+        payments only as a safe default.  Add or remove entries to match the
+        methods your gateway actually supports.  Full list of built-in method
+        xml_ids can be found in addons/payment/data/payment_method_data.xml.
+    -->
+    <record id="payment_provider_generic" model="payment.provider">
+        <field name="name">Generic Payment</field>
+        <field name="code">generic</field>
+        <field name="state">test</field>
+        <field name="is_published" eval="False"/>
+        <!-- Replace with real credentials before going live -->
+        <field name="generic_api_key">demo_api_key</field>
+        <field name="generic_api_secret">demo_api_secret</field>
+        <field name="payment_method_ids" eval="[
+            Command.set([
+                ref('payment.payment_method_card'),
+            ])
+        ]"/>
+    </record>
+
 </odoo>

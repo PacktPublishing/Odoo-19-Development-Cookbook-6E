@@ -10,7 +10,6 @@
                     <field name="name"/>
                     <field name="phone"/>
                     <field name="email"/>
-                    <field name="book_fy"/>
                 </list>
             </field>
         </record>
@@ -35,7 +34,6 @@
                             <group>
                                 <field name="phone"/>
                                 <field name="email"/>
-                                <field name="book_fy"/>
                             </group>
                         </group>
                         <group>

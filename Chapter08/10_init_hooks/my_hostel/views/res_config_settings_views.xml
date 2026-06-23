@@ -27,6 +27,13 @@
         <field name="context">{'module' : 'my_hostel', 'bin_size': False}</field>
     </record>
 
-    <menuitem name="Settings" id="hostel_setting_menu" parent="hostel_main_menu" action="hostel_config_settings_action" sequence="50"/>
+    <menuitem
+        name="Settings"
+        id="hostel_setting_menu"
+        parent="hostel_configuration"
+        action="hostel_config_settings_action"
+        sequence="1"
+        />
+
 
 </odoo>

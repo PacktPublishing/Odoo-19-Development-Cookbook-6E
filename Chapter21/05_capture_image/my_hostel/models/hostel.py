@@ -19,9 +19,9 @@ class Hostel(models.Model):
     mobile = fields.Char('Mobile',required=1)
     email = fields.Char('Email')
 
-    def name_get(self):
+    def _compute_display_name(self):
         result = []
         for record in self:
-            rec_name = "%s (%s)" % (record.name, record.hostel_code)
-            result.append((record.id, rec_name))
-        return result
+            record.display_name = record.name
+            if record.hostel_code:
+                record.display_name = "%s (%s)" % (record.name, record.hostel_code)

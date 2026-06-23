@@ -1,21 +1,29 @@
-# -*- coding: utf-8 -*-
 {
-    'name': "My Hostel",  # Module title
+    "name": "Hostel Management",  # Module title
     "version": "19.0.1.0.0",
-    'summary': "Manage Hostel easily",  # Module subtitle phrase
-    'description': """
-Manage Library
+    "summary": "Manage Hostel easily",  # Module subtitle phrase
+    "description": """
+Manage Hostel
 ==============
-Description related to Hostel.
-    """,  # Supports reStructuredText(RST) format
+Efficiently manage the entire residential facility in the hostel
+    """,  # Supports reStructuredText(RST) format (description is Deprecated)
     "category": "Tools",
     "website": "http://www.serpentcs.com",
-    "depends": ['base'],
-    'data': [
-        'security/groups.xml',
-        'security/ir.model.access.csv',
-        'views/hostel_room.xml',
+    "depends": ["base"],
+    "data": [
+        "security/hostel_security.xml",
+        "security/ir.model.access.csv",
+        "data/data.xml",
+        "views/hostel.xml",
+        "views/hostel_room.xml",
+        "views/hostel_amenities.xml",
+        "views/hostel_student.xml",
+        "views/hostel_categ.xml",
     ],
+    # This demo data files will be loaded if db initialize with demo data (commented because file is not added in this example)
+    # 'demo': [
+    #     'demo.xml'
+    # ],
     "installable": True,
     "author": "Serpent Consulting Services Pvt. Ltd.",
     "license": "AGPL-3",

@@ -27,7 +27,7 @@
             <form string="Hostel Room">
                 
                 <header>
-                    <button name="export_available_rooms_attachment"
+                    <button name="export_available_rooms"
                             type="object"
                             string="Export Rooms"
                             class="btn-primary"/>

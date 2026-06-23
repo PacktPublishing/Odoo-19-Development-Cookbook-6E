@@ -8,7 +8,7 @@ class MyComponent extends Component {
             <i class="fa fa-arrow-left p-1"
                style="cursor: pointer;"
                t-on-click="onPrevious"> </i>
-            <b t-esc="messageList[Math.abs(state.currentIndex%4)]"/>
+            <b t-esc="messageList[((state.currentIndex % messageList.length) + messageList.length) % messageList.length]"/>
             <i class="fa fa-arrow-right p-1"
                style="cursor: pointer;"
                t-on-click="onNext"> </i>
@@ -18,15 +18,15 @@ class MyComponent extends Component {
         </div>`
     setup() {
         this.messageList = [
-            'Hello World',
-            'Welcome to Odoo',
-            'Odoo is awesome',
-            'You are awesome too'
+            "Hello World",
+            "Welcome to Odoo",
+            "Odoo is awesome",
+            "You are awesome too"
         ];
         this.state = useState({ currentIndex: 0 });
     }
     onRemove(ev) {
-        ev.target.closest('div').remove();
+        ev.target.closest("div").remove();
     }
     onNext(ev) {
         this.state.currentIndex++;
@@ -39,4 +39,3 @@ class MyComponent extends Component {
 whenReady().then(() => {
     mount(MyComponent, document.body);
 });
-

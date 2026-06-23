@@ -45,11 +45,11 @@
 
         <menuitem id="hostel_configuration" name="Configuration" parent="my_hostel.hostel_main_menu" 
             groups="my_hostel.group_hostel_manager" 
-            sequence="10"/>
+            sequence="50"/>
 
         <menuitem id="hostel_amenities_menu" name="Hostel Amenities" parent="my_hostel.hostel_configuration" 
             action="my_hostel.action_hostel_amenities"
-            sequence="1"/>
+            sequence="2"/>
 
     </data>
 </odoo>

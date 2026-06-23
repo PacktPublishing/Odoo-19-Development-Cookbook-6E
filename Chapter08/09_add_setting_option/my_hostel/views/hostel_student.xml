@@ -38,6 +38,7 @@
                                 <field name="name"/>
                                 <field name="gender"/>
                                 <field name="active"/>
+                                <field name="room_no"/>
                             </group>
                             <group>
                                 <field name="hostel_id" required="1"/>

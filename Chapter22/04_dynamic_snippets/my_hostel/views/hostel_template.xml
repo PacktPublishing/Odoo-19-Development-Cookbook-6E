@@ -16,7 +16,7 @@
                                     <t t-if="hostel.hostel_rating">
                                         <div t-field="hostel.hostel_rating" class="text-muted"/>
                                     </t>
-                                    <b class="mt8"> Authors </b>
+                                    <b class="mt8"> State: </b>
                                     <ul>
                                         <li t-foreach="hostel.state_id" t-as="state">
                                             <span t-esc="state.name" />

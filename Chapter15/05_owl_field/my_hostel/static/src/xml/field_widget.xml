@@ -9,9 +9,9 @@
     </t>
 
     <span t-name="OWLFieldColorPills" >
-        <t t-foreach="totalColors" t-as='color' t-key="color">
+        <t t-foreach="totalColors" t-as="color" t-key="color">
             <ColorPill onClickColorUpdated="data => this.colorUpdated(data)"
-                       color='color'
+                       color="color"
                        value="props.record.data[props.name]"
                        category_count="categoryInfo[color]"/>
         </t>

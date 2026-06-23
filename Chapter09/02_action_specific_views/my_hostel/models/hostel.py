@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, _
+from odoo import fields, models, _, api
 from odoo.exceptions import UserError
 
 
@@ -19,6 +19,13 @@ class HostelRoom(models.Model):
         ('available', 'Available'),
         ('closed', 'Closed')],
         'State', default="draft")
+
+    @api.model
+    def is_allowed_transition(self, old_state, new_state):
+        allowed = [('draft', 'available'),
+                   ('available', 'closed'),
+                   ('closed', 'draft')]
+        return (old_state, new_state) in allowed
 
     def change_state(self, new_state):
         for room in self:

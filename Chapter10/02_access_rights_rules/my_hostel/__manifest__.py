@@ -5,14 +5,15 @@
     "description": """
 Manage Hostel
 ==============
-Efficiently manage the entire residential facility in the school
+Efficiently manage the entire residential facility in the hostel
     """,  # Supports reStructuredText(RST) format (description is Deprecated)
     "category": "Hostel",
     "website": "http://www.serpentcs.com",
     "depends": ["base"],
     'data': [
         'security/groups.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        "views/hostel_views.xml",
     ],
     # This demo data files will be loaded if db initialize with demo data (commented because file is not added in this example)
     # 'demo': [
