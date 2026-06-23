@@ -19,6 +19,9 @@ class HostelController(http.Controller):
                 'hostel': hostel,
             })
 
-    @http.route(['/hostel_hostel/search_read'], type='jsonrpc', auth='user', methods=['POST'], website=True)
+    @http.route(['/hostel_hostel/search_read'], type='jsonrpc',
+                auth='public', methods=['POST'], website=True)
     def hostel_hostel_search_read(self, fields):
-        return request.env['hostel.hostel'].search_read([], fields)
+        limit = 5
+        return request.env['hostel.hostel'].search_read([], fields,
+                                                        limit=limit)

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================
+         LIST VIEW
+    ======================== -->
+    <record id="view_hostel_list" model="ir.ui.view">
+        <field name="name">hostel.hostel.list</field>
+        <field name="model">hostel.hostel</field>
+        <field name="arch" type="xml">
+            <list string="Hostels">
+                <field name="name"/>
+                <field name="hostel_code"/>
+                <field name="street"/>
+                <field name="street2"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================
+         FORM VIEW
+    ======================== -->
+    <record id="view_hostel_form" model="ir.ui.view">
+        <field name="name">hostel.hostel.form</field>
+        <field name="model">hostel.hostel</field>
+        <field name="arch" type="xml">
+            <form string="Hostel">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Hostel Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Sunrise Hostel"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Basic Information">
+                            <field name="name" string="Hostel Name"/>
+                            <field name="hostel_code" string="Code"/>
+                        </group>
+
+                        <group string="Address">
+                            <field name="street" string="Street"/>
+                            <field name="street2" string="Street 2"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================
+         WINDOW ACTION
+    ======================== -->
+    <record id="action_hostel_hostel" model="ir.actions.act_window">
+        <field name="name">Hostels</field>
+        <field name="res_model">hostel.hostel</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_hostel_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_hostel_form')}),
+        ]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Hostel!
+            </p>
+            <p>
+                Manage hostel information including name, code, and address.
+            </p>
+        </field>
+    </record>
+
+    <!-- ========================
+         MAIN MENU
+    ======================== -->
+    <menuitem
+        id="menu_hostel_root"
+        name="Hostel"
+        sequence="10"
+        web_icon="hostel,static/description/icon.png"
+        groups = "my_hostel.group_hostel_user"
+    />
+
+    <!-- Sub Menu -->
+    <menuitem
+        id="menu_hostel_configuration"
+        name="Configuration"
+        parent="menu_hostel_root"
+        sequence="10"
+    />
+
+    <!-- Action Menu Item -->
+    <menuitem
+        id="menu_hostel_hostel"
+        name="Hostels"
+        parent="menu_hostel_configuration"
+        action="action_hostel_hostel"
+        sequence="10"
+    />
+
+</odoo>

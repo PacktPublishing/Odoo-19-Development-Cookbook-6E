@@ -13,6 +13,11 @@ class HostelRoom(models.Model):
     _inherit = ['mail.thread.main.attachment']
     _description = "Information about hostel Room"
 
+    @api.model
+    def _lang_get(self):
+        return self.env['res.lang'].get_installed()
+
+    lang = fields.Selection(_lang_get, string='Language')
     name = fields.Char(string="Hostel Name", required=True)
     room_no = fields.Char(string="Room Number", required=True)
     other_info = fields.Text("Other Information",

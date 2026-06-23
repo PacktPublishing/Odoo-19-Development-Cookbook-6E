@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acl_hostel,hostel_hostel_default,model_hostel_hostel,base.group_user,1,0,0,0
+acl_hostel_manager,hostel_manager,model_hostel_hostel,my_hostel.group_hostel_manager,1,1,1,1
+my_hostel.access_hostel_room_category,access_hostel_room_category,my_hostel.model_hostel_room_category,base.group_user,1,1,1,1
+

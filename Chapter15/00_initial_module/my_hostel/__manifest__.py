@@ -28,4 +28,3 @@
     # Technical
     'installable': True
 }
-

@@ -9,5 +9,14 @@
         <field name="name">Hostel Room 01</field>
         <field name="room_no">1</field>
     </record>
+    <record id="hostel_room_2" model="hostel.room">
+        <field name="name">Standard Room 2-Bed</field>
+        <field name="room_no">A101</field>
+    </record>
+    <record id="hostel_room_3" model="hostel.room">
+        <field name="name">Standard Room 4-Bed</field>
+        <field name="room_no">A301</field>
+    </record>
+
 
 </odoo>

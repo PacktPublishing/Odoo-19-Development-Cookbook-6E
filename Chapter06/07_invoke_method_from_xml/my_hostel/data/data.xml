@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
-    <record id="res_partner_packt" model="res.partner">
-        <field name="name">Packt Publishing</field>
-        <field name="city">Birmingham</field>
-        <field name="country_id" ref="base.uk" />
+    <!-- Precisions -->
+    <record forcecreate="True" id="decimal_point" model="decimal.precision">
+        <field name="name">Rating Value</field>
+        <field name="digits">3</field>
     </record>
 
-     <record id="room_category_all" model="hostel.room.category" forcecreate="False">
+    <record id="hostel_room_1" model="hostel.room">
+        <field name="name"> Hostel Room 01 </field>
+        <field name="student_per_room">3</field>
+        <field name="room_no">001</field>
+    </record>
+
+    <record id="base.main_company" model="res.company">
+        <field name="name">VB Group of Hostels</field>
+    </record>
+
+    <record id="hostel_hostel_1" model="hostel.hostel">
+        <field name="name">Hostel 1</field>
+        <field name="hostel_code">H1</field>
+        <field name="phone">1234567890</field>
+        <field name="mobile">9998999789</field>
+        <field name="city">Birmingham</field>
+        <field name="country_id" ref="base.uk"/>
+    </record>
+
+    <record id="hostel_category_all" model="hostel.category" forcecreate="False">
         <field name="name">All Rooms</field>
     </record>
 
     <!-- Temp category to delete, in real case this record created from another module -->
-    <record id="room_category_to_remove" model="hostel.room.category">
+    <record id="room_category_to_remove" model="hostel.category">
         <field name="name">Single Sharing</field>
     </record>
-    <record id="room_category_not_remove" model="hostel.room.category">
+    <record id="room_category_not_remove" model="hostel.category">
         <field name="name">Double Sharing</field>
     </record>
 
-    <delete model="hostel.room.category" id="room_category_to_remove"/>
+    <delete model="hostel.category" id="room_category_to_remove"/>
 
-    <function model="hostel.room" name="update_room_price" eval="(ref('room_category_all'), 20)"/>
+    <function model="hostel.room" name="update_room_price"/>
+
 
 </odoo>

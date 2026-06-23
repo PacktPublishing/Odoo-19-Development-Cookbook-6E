@@ -2,18 +2,18 @@ const {
     Component,
     mount,
     xml,
-    whenReady,
     useState,
+    whenReady,
     onWillStart,
-    onMounted,
-    onWillUnmount,
-    onWillUpdateProps,
-    onPatched,
-    onWillPatch,
     onWillRender,
     onRendered,
-    onError,
+    onMounted,
+    onWillUpdateProps,
+    onWillPatch,
+    onPatched,
+    onWillUnmount,
     onWillDestroy,
+    onError,
 } = owl;
 
 console.log("Load component......");
@@ -24,7 +24,7 @@ class MyComponent extends Component {
             <i class="fa fa-arrow-left p-1"
                style="cursor: pointer;"
                t-on-click="onPrevious"> </i>
-            <b t-esc="messageList[Math.abs(state.currentIndex%4)]"/>
+            <b t-esc="messageList[((state.currentIndex % messageList.length) + messageList.length) % messageList.length]"/>
             <i class="fa fa-arrow-right p-1"
                style="cursor: pointer;"
                t-on-click="onNext"> </i>
@@ -34,45 +34,45 @@ class MyComponent extends Component {
         </div>`
     setup() {
         this.messageList = [
-            'Hello World',
-            'Welcome to Odoo',
-            'Odoo is awesome',
-            'You are awesome too'
+            "Hello World",
+            "Welcome to Odoo",
+            "Odoo is awesome",
+            "You are awesome too"
         ];
         this.state = useState({ currentIndex: 0 });
-        onWillStart(async () => {
-            console.log('CALLED:> willStart');
+        onWillStart(() => {
+            console.log("CALLED: onWillStart");
         });
         onWillRender(() => {
-            console.log('CALLED:> willRender');
+            console.log("CALLED: onWillRender");
         });
         onRendered(() => {
-            console.log('CALLED:> Render');
+            console.log("CALLED: onRendered");
         });
         onMounted(() => {
-            console.log('CALLED:> Mounted');
-        });
-        onWillUnmount(() => {
-            console.log('CALLED:> WillUnmount');
+            console.log("CALLED: onMounted");
         });
         onWillUpdateProps(() => {
-            console.log('CALLED:> WillUpdateProps');
+            console.log("CALLED: onWillUpdateProps");
         });
         onWillPatch(() => {
-            console.log('CALLED:> WillPatch');
+            console.log("CALLED: onWillPatch");
         });
         onPatched(() => {
-            console.log('CALLED:> Patched');
+            console.log("CALLED: onPatched");
+        });
+        onWillUnmount(() => {
+            console.log("CALLED: onWillUnmount");
         });
         onWillDestroy(() => {
-            console.log('CALLED:> WillDestroy');
+            console.log("CALLED: onWillDestroy");
         });
         onError(() => {
-            console.log('CALLED:> Error');
+            console.log("CALLED: onError");
         });
     }
     onRemove(ev) {
-        ev.target.closest('div').remove();
+        ev.target.closest("div").remove();
     }
     onNext(ev) {
         this.state.currentIndex++;
@@ -85,4 +85,3 @@ class MyComponent extends Component {
 whenReady().then(() => {
     mount(MyComponent, document.body);
 });
-

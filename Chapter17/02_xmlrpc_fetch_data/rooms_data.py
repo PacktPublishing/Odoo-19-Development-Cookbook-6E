@@ -1,8 +1,8 @@
 from xmlrpc import client
 
 # room data with search method
-server_url = 'http://localhost:1919'
-db_name = 'cookbook_19'
+server_url = 'http://localhost:8069'
+db_name = 'odoo-test'
 username = 'admin'
 password = 'admin'
 
